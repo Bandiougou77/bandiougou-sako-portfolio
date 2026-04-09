@@ -1771,9 +1771,9 @@
     }
 
     function catLabel(cat) {
-      if (cat === 'front') return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#60A5FA;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(96,165,250,0.15);">🎨 Front-end</div>`;
-      if (cat === 'back')  return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#34D399;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(52,211,153,0.15);">⚙️ Back-end</div>`;
-      return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#94A3B8;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(148,163,184,0.1);">🔀 Transversal</div>`;
+      if (cat === 'front') return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#60A5FA;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(96,165,250,0.15);">▸ Front-end</div>`;
+      if (cat === 'back')  return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#34D399;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(52,211,153,0.15);">▸ Back-end</div>`;
+      return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#94A3B8;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(148,163,184,0.1);">▸ Transversal</div>`;
     }
 
     function renderGroupedSkills(skills, containerId) {
@@ -1796,15 +1796,15 @@
       tools.forEach(t => { (groups[t.cat] = groups[t.cat] || []).push(t); });
       let html = '';
       if (groups.front) {
-        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#60A5FA;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;width:100%;">🎨 Front-end</div>`;
+        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#60A5FA;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;width:100%;">▸ Front-end</div>`;
         html += groups.front.map(toolTag).join('');
       }
       if (groups.back) {
-        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#34D399;text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;width:100%;">⚙️ Back-end</div>`;
+        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#34D399;text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;width:100%;">▸ Back-end</div>`;
         html += groups.back.map(toolTag).join('');
       }
       if (groups.dev) {
-        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#94A3B8;text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;width:100%;">🛠️ Dev &amp; Déploiement</div>`;
+        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#94A3B8;text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;width:100%;">▸ Dev &amp; Déploiement</div>`;
         html += groups.dev.map(toolTag).join('');
       }
       document.getElementById('toolTags').innerHTML = html;
