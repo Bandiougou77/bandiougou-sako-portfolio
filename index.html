@@ -1645,28 +1645,36 @@
 
     // Data
     const coreSkills = [
-      {name:'HTML5', pct:80, def:'Langage de balisage standard pour structurer le contenu des pages web. La base de tout site internet.'},
-      {name:'CSS3', pct:85, def:'Langage de styles qui contrôle la mise en page, les couleurs, les animations et l\'apparence visuelle des pages.'},
-      {name:'Kotlin', pct:60, def:'Langage moderne de JetBrains pour le développement Android. Concis, sûr et interopérable avec Java.'},
-      {name:'PHP', pct:65, def:'Langage serveur très répandu pour le web. Utilisé pour générer des pages dynamiques et interagir avec des bases de données.'},
-      {name:'MySQL', pct:80, def:'Système de gestion de base de données relationnelle open-source. Permet de stocker et interroger des données structurées via SQL.'},
-      {name:'Git / GitHub', pct:85, def:'Git est un outil de versioning pour suivre les modifications du code. GitHub est la plateforme de collaboration en ligne basée sur Git.'},
+      // Front-end
+      {name:'HTML5',      pct:80, cat:'front', def:'Langage de balisage standard pour structurer le contenu des pages web. La base de tout site internet.'},
+      {name:'CSS3',       pct:85, cat:'front', def:'Langage de styles qui contrôle la mise en page, les couleurs, les animations et l\'apparence visuelle des pages.'},
+      // Back-end
+      {name:'PHP',        pct:65, cat:'back',  def:'Langage serveur très répandu pour le web. Utilisé pour générer des pages dynamiques et interagir avec des bases de données.'},
+      {name:'MySQL',      pct:80, cat:'back',  def:'Système de gestion de base de données relationnelle open-source. Permet de stocker et interroger des données structurées via SQL.'},
+      {name:'Kotlin',     pct:60, cat:'back',  def:'Langage moderne de JetBrains pour le développement Android. Concis, sûr et interopérable avec Java.'},
+      // Transversal
+      {name:'Git / GitHub', pct:85, cat:'transversal', def:'Git est un outil de versioning pour suivre les modifications du code. GitHub est la plateforme de collaboration en ligne basée sur Git.'},
     ];
 
     const learningSkills = [
-      {name:'TailwindCSS', pct:45, def:'Framework CSS utilitaire qui permet de styliser directement dans le HTML via des classes prédéfinies. Très rapide à prendre en main.'},
-      {name:'Alpine.js', pct:50, def:'Micro-framework JavaScript léger pour ajouter de l\'interactivité dans le HTML, sans configuration complexe.'},
-      {name:'Laravel', pct:50, def:'Framework PHP élégant et puissant qui suit le pattern MVC. Idéal pour créer des applications web robustes rapidement.'},
-      {name:'JavaScript', pct:45, def:'Langage de programmation du web côté client. Permet de rendre les pages interactives et dynamiques dans le navigateur.'},
+      // Frameworks front-end
+      {name:'JavaScript', pct:45, cat:'front', def:'Langage de programmation du web côté client. Permet de rendre les pages interactives et dynamiques dans le navigateur.'},
+      {name:'TailwindCSS', pct:45, cat:'front', def:'Framework CSS utilitaire qui permet de styliser directement dans le HTML via des classes prédéfinies. Très rapide à prendre en main.'},
+      {name:'Alpine.js',  pct:50, cat:'front', def:'Micro-framework JavaScript léger pour ajouter de l\'interactivité dans le HTML, sans configuration complexe.'},
+      // Frameworks back-end
+      {name:'Laravel',    pct:50, cat:'back',  def:'Framework PHP élégant et puissant qui suit le pattern MVC. Idéal pour créer des applications web robustes rapidement.'},
     ];
 
     const tools = [
-      {name:'VS Code', def:'Éditeur de code open-source de Microsoft, très populaire grâce à ses extensions, son terminal intégré et son support multi-langages.'},
-      {name:'Git', def:'Système de contrôle de version distribué. Permet de gérer l\'historique du code, les branches et la collaboration.'},
-      {name:'GitHub', def:'Plateforme cloud pour héberger des dépôts Git. Facilite la collaboration, les pull requests et le suivi des issues.'},
-      {name:'Vercel', def:'Plateforme de déploiement spécialisée pour les projets front-end. Déploiement automatique depuis GitHub en quelques secondes.'},
-      {name:'Composer', def:'Gestionnaire de dépendances pour PHP. Permet d\'installer et gérer les bibliothèques externes dans un projet PHP/Laravel.'},
-      {name:'NPM', def:'Node Package Manager — gestionnaire de paquets JavaScript. Permet d\'installer des librairies front-end et des outils de build.'},
+      // Front-end
+      {name:'NPM',      cat:'front', def:'Node Package Manager — gestionnaire de paquets JavaScript. Permet d\'installer des librairies front-end et des outils de build.'},
+      // Back-end
+      {name:'Composer', cat:'back',  def:'Gestionnaire de dépendances pour PHP. Permet d\'installer et gérer les bibliothèques externes dans un projet PHP/Laravel.'},
+      // Dev & déploiement
+      {name:'VS Code',  cat:'dev',   def:'Éditeur de code open-source de Microsoft, très populaire grâce à ses extensions, son terminal intégré et son support multi-langages.'},
+      {name:'Git',      cat:'dev',   def:'Système de contrôle de version distribué. Permet de gérer l\'historique du code, les branches et la collaboration.'},
+      {name:'GitHub',   cat:'dev',   def:'Plateforme cloud pour héberger des dépôts Git. Facilite la collaboration, les pull requests et le suivi des issues.'},
+      {name:'Vercel',   cat:'dev',   def:'Plateforme de déploiement spécialisée pour les projets front-end. Déploiement automatique depuis GitHub en quelques secondes.'},
     ];
 
     const techs = [
@@ -1761,13 +1769,49 @@
       </div>`;
     }
 
-    document.getElementById('coreSkills').innerHTML = coreSkills.map(skillHtml).join('');
-    document.getElementById('learningSkills').innerHTML = learningSkills.map(skillHtml).join('');
-    document.getElementById('toolTags').innerHTML = tools.map(t => `
-      <span class="tag-wrap">
-        <span class="tag px-3 py-1 rounded-full">${t.name}</span>
-        <span class="def-btn" tabindex="0">?<span class="def-tooltip">${t.def}</span></span>
-      </span>`).join('');
+    function catLabel(cat) {
+      if (cat === 'front') return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#60A5FA;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(96,165,250,0.15);">🎨 Front-end</div>`;
+      if (cat === 'back')  return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#34D399;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(52,211,153,0.15);">⚙️ Back-end</div>`;
+      return `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#94A3B8;text-transform:uppercase;letter-spacing:.1em;margin:1rem 0 .75rem;padding-bottom:.4rem;border-bottom:1px solid rgba(148,163,184,0.1);">🔀 Transversal</div>`;
+    }
+
+    function renderGroupedSkills(skills, containerId) {
+      const groups = {};
+      skills.forEach(s => { (groups[s.cat] = groups[s.cat] || []).push(s); });
+      const order = ['front','back','transversal'];
+      let html = '';
+      order.forEach(cat => {
+        if (groups[cat] && groups[cat].length) {
+          html += catLabel(cat);
+          html += groups[cat].map(skillHtml).join('');
+        }
+      });
+      document.getElementById(containerId).innerHTML = html;
+    }
+
+    function renderGroupedTools() {
+      const toolTag = t => `<span class="tag-wrap"><span class="tag px-3 py-1 rounded-full">${t.name}</span><span class="def-btn" tabindex="0">?<span class="def-tooltip">${t.def}</span></span></span>`;
+      const groups = {};
+      tools.forEach(t => { (groups[t.cat] = groups[t.cat] || []).push(t); });
+      let html = '';
+      if (groups.front) {
+        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#60A5FA;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;width:100%;">🎨 Front-end</div>`;
+        html += groups.front.map(toolTag).join('');
+      }
+      if (groups.back) {
+        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#34D399;text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;width:100%;">⚙️ Back-end</div>`;
+        html += groups.back.map(toolTag).join('');
+      }
+      if (groups.dev) {
+        html += `<div style="font-size:.7rem;font-family:'DM Mono',monospace;color:#94A3B8;text-transform:uppercase;letter-spacing:.1em;margin:.75rem 0 .5rem;width:100%;">🛠️ Dev &amp; Déploiement</div>`;
+        html += groups.dev.map(toolTag).join('');
+      }
+      document.getElementById('toolTags').innerHTML = html;
+    }
+
+    renderGroupedSkills(coreSkills, 'coreSkills');
+    renderGroupedSkills(learningSkills, 'learningSkills');
+    renderGroupedTools();
     document.getElementById('techGrid').innerHTML = techs.map(t => `
       <div class="card-glass rounded-xl p-4 text-center cursor-default">
         <div style="font-size:1.5rem;margin-bottom:.25rem;">${t.icon}</div>
